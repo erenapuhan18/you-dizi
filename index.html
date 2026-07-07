@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOU — Merhaba, sen.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --krem:#efe9dc;
+  --kagit:#e6decb;
+  --murekkep:#211c18;
+  --soluk-murekkep:#5c5348;
+  --kan:#a3232b;
+  --bodrum:#131114;
+  --bodrum-2:#1c191e;
+  --cam:#2e2a33;
+  --soluk:#d8d2c4;
+  --gri:#8f887c;
+  --kan-parlak:#c2313c;
+  --serif-d:'Cormorant Garamond',serif;
+  --serif-b:'IBM Plex Serif',serif;
+  --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bodrum)}
+body{
+  background:var(--krem);color:var(--murekkep);
+  font-family:var(--serif-b);font-size:17.5px;line-height:1.75;
+  overflow-x:hidden;
+}
+::selection{background:var(--kan);color:var(--krem)}
+a{color:var(--kan)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--kan);outline-offset:3px}
+
+/* ---------- ortak ---------- */
+.icerik{max-width:740px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.34em;color:var(--soluk-murekkep)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+p strong{font-weight:600}
+p em{font-style:italic}
+
+/* ---------- vitrin (üst, aydınlık) ---------- */
+#vitrin{padding:72px 0 0;position:relative}
+.hero-baslik{
+  font-family:var(--serif-d);font-weight:700;
+  font-size:clamp(96px,22vw,240px);line-height:.85;letter-spacing:-.01em;
+  margin:18px 0 8px;
+}
+.hero-baslik i{font-style:normal;color:var(--kan)}
+.yazilan{
+  font-family:var(--serif-d);font-style:italic;font-weight:500;
+  font-size:clamp(24px,5vw,38px);color:var(--kan);min-height:1.3em;
+}
+.yazilan .imlec{animation:yanip 1s infinite;color:var(--kan)}
+@keyframes yanip{50%{opacity:0}}
+.monolog{margin-top:34px;max-width:600px}
+.monolog p{margin-bottom:20px;color:#37302a}
+.monolog p:first-child::first-letter{
+  font-family:var(--serif-d);font-size:3.1em;float:left;
+  line-height:.82;padding-right:8px;color:var(--kan);font-weight:700;
+}
+.cerceve{margin:56px 0 0;background:var(--kagit);border:1px solid #d3c9b2;padding:14px}
+.cerceve img{width:100%;display:block;filter:sepia(.14) contrast(1.02) brightness(.97)}
+.cerceve figcaption{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--soluk-murekkep);
+  padding:12px 2px 2px;
+}
+.bolum{padding:84px 0 0}
+.bolum-baslik{font-family:var(--serif-d);font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:10px 0 26px}
+.bolum-baslik .no{color:var(--kan)}
+.kenar-not{
+  border-left:3px solid var(--kan);padding:6px 0 6px 20px;margin:30px 0;
+  font-family:var(--serif-d);font-style:italic;font-size:22px;line-height:1.45;color:#48403a;
+}
+
+/* siyah-beyaz gözetleme karesi */
+.gozetleme{margin:64px 0 0;position:relative}
+.gozetleme img{width:100%;display:block;filter:grayscale(1) contrast(1.1) brightness(.92)}
+.gozetleme figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:18px 20px 14px;
+  background:linear-gradient(to top,rgba(19,17,20,.82),transparent);
+  color:var(--soluk);font-family:var(--serif-d);font-style:italic;font-size:clamp(17px,3vw,22px);
+}
+
+/* ---------- yırtık geçiş ---------- */
+.yirtik{
+  margin-top:-1px;
+  background:var(--bodrum);
+  padding-top:26px;
+  position:relative;
+}
+.yirtik::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:26px;
+  background:
+    linear-gradient(-45deg, var(--bodrum) 9px, transparent 0),
+    linear-gradient(45deg, var(--bodrum) 9px, transparent 0);
+  background-color:var(--krem);
+  background-size:26px 26px;
+  background-position:0 0;
+  background-repeat:repeat-x;
+}
+.yirtik .uyari{
+  text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;
+  color:var(--kan-parlak);padding:26px 20px 0;
+}
+
+/* ---------- bodrum (alt, karanlık) ---------- */
+#bodrum{background:var(--bodrum);color:var(--soluk);padding-bottom:0}
+#bodrum .bolum-baslik{color:var(--krem)}
+#bodrum p{color:#b6b0a3}
+#bodrum p strong{color:var(--soluk)}
+#bodrum .eyebrow{color:var(--gri)}
+#bodrum .kenar-not{color:#a39c8e;border-left-color:var(--kan-parlak)}
+
+.kafes-figur{margin:44px 0;border:1px solid var(--cam);background:#000;position:relative}
+.kafes-figur img{width:100%;display:block;filter:grayscale(.25) contrast(1.06) brightness(.85)}
+.kafes-figur::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    repeating-linear-gradient(to right, transparent 0, transparent 78px, rgba(216,210,196,.10) 78px, rgba(216,210,196,.10) 81px),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 96px, rgba(216,210,196,.07) 96px, rgba(216,210,196,.07) 99px);
+}
+.kafes-figur figcaption{
+  position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--gri);
+  padding:11px 14px;border-top:1px solid var(--cam);
+}
+
+/* polaroidler */
+.polaroidler{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px 22px;margin:50px 0 10px;
+}
+.pol{
+  background:#f4efe4;padding:12px 12px 14px;color:var(--murekkep);
+  box-shadow:0 12px 30px rgba(0,0,0,.45);position:relative;
+}
+.pol:nth-child(odd){transform:rotate(-1.6deg)}
+.pol:nth-child(even){transform:rotate(1.3deg)}
+.pol .p-img{aspect-ratio:16/11;overflow:hidden;background:#111}
+.pol img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(.16) contrast(1.03) brightness(.94)}
+.pol h3{font-family:var(--serif-d);font-weight:700;font-size:24px;margin:12px 2px 0}
+.pol .p-alt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--soluk-murekkep);margin:2px 2px 8px}
+.pol p{font-size:13.5px;line-height:1.55;color:#4a423a !important;margin:0 2px}
+.pol .damga{
+  position:absolute;top:20px;right:-10px;transform:rotate(7deg);z-index:2;
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;font-weight:700;
+  color:var(--kan);border:2px solid var(--kan);padding:4px 9px;background:rgba(244,239,228,.9);
+}
+
+/* delil rafı — 5 cilt */
+.raf{margin:46px 0 0;border-bottom:10px solid #241f26;padding:0 10px;display:flex;gap:10px;align-items:flex-end;justify-content:center}
+.cilt{
+  writing-mode:vertical-rl;
+  height:210px;width:52px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;font-weight:700;
+  color:var(--soluk);background:var(--bodrum-2);
+  border:1px solid var(--cam);border-bottom:none;
+  padding:14px 0;transition:transform .25s ease,background .25s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.cilt .rakam{font-family:var(--serif-d);font-size:19px;color:var(--kan-parlak);letter-spacing:0}
+.cilt:hover,.cilt:focus-visible{transform:translateY(-14px);background:#262229}
+.raf-etiket{
+  text-align:center;font-family:var(--serif-d);font-style:italic;font-size:19px;
+  color:#a39c8e;padding:18px 20px 0;min-height:56px;
+}
+
+/* künye */
+.kunye{border:1px solid var(--cam);margin:54px 0 0}
+.kunye .k-row{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--cam)}
+.kunye .k-row:last-child{border-bottom:none}
+.kunye .k-k{
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--gri);
+  padding:14px 16px;border-right:1px solid var(--cam);align-self:center;
+}
+.kunye .k-v{padding:14px 16px;font-size:14.5px;color:#b6b0a3}
+.kunye .k-v b{color:var(--soluk)}
+@media (max-width:640px){
+  .kunye .k-row{grid-template-columns:1fr}
+  .kunye .k-k{border-right:none;padding-bottom:0}
+}
+
+/* final */
+.final{position:relative;margin-top:90px;overflow:hidden}
+.final img{width:100%;display:block;min-height:420px;object-fit:cover;filter:contrast(1.05) brightness(.72)}
+.final .f-kat{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:24px;
+  background:radial-gradient(ellipse at center,rgba(19,17,20,.25),rgba(19,17,20,.78));
+}
+.final .f-soz{
+  font-family:var(--serif-d);font-weight:600;font-style:italic;
+  font-size:clamp(28px,6vw,52px);line-height:1.2;color:var(--krem);
+  max-width:700px;text-shadow:0 2px 30px rgba(0,0,0,.6);
+}
+.final .f-kim{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#cdc6b6;margin-top:22px}
+footer{
+  background:var(--bodrum);text-align:center;padding:44px 24px 120px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--gri);line-height:2.5;
+}
+footer .goz{color:var(--kan-parlak)}
+
+/* ---------- joe'nun defteri ---------- */
+#defter{
+  position:fixed;right:22px;bottom:20px;z-index:60;width:236px;
+  background:#f6f1e6;color:#2c2620;border:1px solid #d8cfb8;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);
+  padding:14px 16px 15px;transform:rotate(-1deg);
+  opacity:0;pointer-events:none;transition:opacity .5s,transform .5s;
+}
+#defter.gorunur{opacity:1}
+#defter::before{
+  content:"";position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;
+  background:var(--kan);border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.4);
+}
+#defter .d-bas{font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;color:#8d8271;margin-bottom:7px}
+#defter .d-not{font-family:var(--serif-d);font-style:italic;font-size:16.5px;line-height:1.4;min-height:44px}
+@media (max-width:640px){#defter{width:200px;right:12px;bottom:12px}}
+
+/* ---------- okuma kurdelesi ---------- */
+#kurdeleKap{position:fixed;top:0;right:36px;z-index:55;pointer-events:none;opacity:0;transition:opacity .4s}
+#kurdeleKap.gorunur{opacity:1}
+#kurdeleKap .serit{
+  width:13px;height:0;margin-left:auto;
+  background:linear-gradient(to bottom,#7e1b22,var(--kan));
+  clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 9px),0 100%);
+  box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+#kurdeleKap .yuzde{display:block;text-align:right;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--kan);padding-top:6px}
+@media (max-width:640px){#kurdeleKap{right:14px}}
+
+/* ---------- sansürlü tutanak ---------- */
+.tutanak{
+  background:#f1ebdd;color:#26211b;padding:30px 28px 24px;margin:44px 0 0;
+  font-family:var(--mono);font-size:12.5px;line-height:2.15;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+.tutanak .t-bas{font-size:11px;letter-spacing:.22em;font-weight:700;border-bottom:2px solid #26211b;padding-bottom:10px;margin-bottom:16px}
+.tutanak .ipucu{font-size:9px;letter-spacing:.2em;color:#8d8271;margin-bottom:12px}
+.tutanak .t-alt{margin-top:18px;font-size:9.5px;letter-spacing:.18em;color:#7d745f;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.tutanak .muhur{display:inline-block;transform:rotate(-4deg);color:var(--kan);border:2px solid var(--kan);padding:3px 8px;font-weight:700;font-size:9px;letter-spacing:.16em}
+.sansur{
+  background:#1a1712;color:transparent;padding:1px 7px;cursor:pointer;
+  user-select:none;transition:background .3s,color .3s;
+}
+.sansur:hover,.sansur:focus-visible,.sansur.acik{background:rgba(163,35,43,.14);color:var(--kan);font-weight:700}
+
+/* ---------- dosya: sen ---------- */
+.dosya{
+  background:#f4efe4;color:#26211b;padding:0 0 24px;margin:44px 0 0;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);position:relative;
+  transition:opacity .9s ease,transform .9s ease,filter .9s ease;
+}
+.dosya .d-tab{
+  display:inline-block;background:var(--kan);color:#f4efe4;
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  padding:8px 16px;margin:-13px 0 20px 24px;transform:rotate(-1deg);
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
+}
+.dosya dl{display:grid;grid-template-columns:180px 1fr;margin:0 26px}
+.dosya dt{font-family:var(--mono);color:#8d8271;letter-spacing:.18em;font-size:10px;padding:9px 0;border-bottom:1px dotted #cfc5ab;align-self:center}
+.dosya dd{font-family:var(--mono);font-size:12.5px;padding:9px 0;border-bottom:1px dotted #cfc5ab;letter-spacing:.05em}
+#bodrum .dosya .yorum{margin:20px 26px 0;font-family:var(--serif-d);font-style:italic;font-size:20px;line-height:1.5;color:#3d352c}
+.yak{
+  margin:22px 26px 0;font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  background:none;border:1.5px solid var(--kan);color:var(--kan);padding:11px 18px;cursor:pointer;
+}
+.yak:hover{background:var(--kan);color:#f4efe4}
+.dosya.yandi{opacity:0;transform:scale(.96) rotate(1.5deg);filter:sepia(.6) brightness(.5);pointer-events:none}
+@media (max-width:640px){.dosya dl{grid-template-columns:1fr}.dosya dt{border-bottom:none;padding-bottom:0}}
+
+/* ---------- joe'dan mektup ---------- */
+.ad-satiri{display:flex;align-items:center;gap:14px;margin:26px 0 0;flex-wrap:wrap}
+.ad-satiri label{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--gri)}
+.ad-satiri input{
+  background:none;border:none;border-bottom:1px solid var(--cam);color:var(--soluk);
+  font-family:var(--serif-d);font-style:italic;font-size:19px;padding:4px 2px;width:230px;outline:none;
+}
+.ad-satiri input:focus{border-bottom-color:var(--kan-parlak)}
+.zarf{
+  width:min(430px,100%);margin:32px auto 0;position:relative;cursor:pointer;
+  background:#efe8d8;border:1px solid #d3c9b2;aspect-ratio:16/8.6;
+  box-shadow:0 14px 34px rgba(0,0,0,.45);perspective:600px;transition:transform .3s;
+}
+.zarf:hover{transform:translateY(-5px)}
+.zarf .kapak{
+  position:absolute;inset:0;z-index:2;transform-origin:top;
+  background:#e6dcc6;clip-path:polygon(0 0,100% 0,50% 58%);
+  transition:transform .7s ease,opacity .7s;
+}
+.zarf.acik .kapak{transform:rotateX(180deg);opacity:.25}
+.zarf .muhur{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-58%);z-index:3;
+  width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#c23540,#791a21);
+  color:#f4efe4;font-family:var(--serif-d);font-weight:700;font-size:24px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 8px rgba(0,0,0,.4);transition:opacity .5s;
+}
+.zarf.acik .muhur{opacity:0}
+.zarf .adres{
+  position:absolute;left:0;right:0;bottom:12%;text-align:center;z-index:1;
+  font-family:var(--serif-d);font-style:italic;font-size:21px;color:#3d352c;
+}
+.mektup{
+  display:none;width:min(560px,100%);margin:28px auto 0;background:#f4efe4;color:#332c24;
+  padding:30px 30px 26px;box-shadow:0 12px 30px rgba(0,0,0,.45);
+  font-family:var(--serif-d);font-style:italic;font-size:19px;line-height:1.75;
+  white-space:pre-line;transform:rotate(-.5deg);
+}
+.mektup.gorunur{display:block}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .yazilan .imlec{animation:none}
+  .cilt{transition:none}
+  .zarf .kapak{transition:none}
+}
+
+/* #flat: headless doğrulama */
+html.flat .rv{opacity:1;transform:none;transition:none}
+html.flat #defter{opacity:1}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}.yazilan .gizli{display:inline}</style></noscript>
+</head>
+<body>
+
+<!-- okuma kurdelesi -->
+<div id="kurdeleKap" aria-hidden="true">
+  <div class="serit"></div>
+  <span class="yuzde">%0</span>
+</div>
+
+<!-- joe'nun defteri -->
+<div id="defter" aria-live="polite">
+  <div class="d-bas">JOE'NUN DEFTERİ — YENİ NOT</div>
+  <div class="d-not" id="dNot"></div>
+</div>
+
+<!-- ================= VİTRİN ================= -->
+<header id="vitrin">
+  <div class="icerik">
+    <div class="eyebrow rv in">NETFLIX DİZİSİ ÜZERİNE BİR İNCELEME — <span style="color:var(--kan)">ŞU AN İZLENİYORSUN</span></div>
+    <h1 class="hero-baslik">YOU<i>.</i></h1>
+    <div class="yazilan" aria-label="Merhaba, sen.">— <span id="yazi"></span><span class="imlec">|</span></div>
+
+    <div class="monolog">
+      <p class="rv">Seni burada görmek ne güzel. Bir dizi sayfası daha açtın; başlığa baktın,
+      belki kaşını kaldırdın. Acele etme. Ben beklemeyi iyi bilirim.
+      <strong>Ben Joe. Joe Goldberg.</strong> Kitapçı işletirim. Klasikleri severim,
+      insanları okurum. Özellikle senin gibi… dikkatli okuyucuları.</p>
+      <p class="rv">Dizim beş sezon sürdü. Dört şehir, dört büyük aşk, sayısını
+      söylemeyeceğim kadar <em>talihsizlik</em>. İnsanlar bana "romantik" dedi,
+      "canavar" dedi, ikisinin arasında karar veremedi. Sen de veremeyeceksin.
+      Mesele de tam olarak bu.</p>
+    </div>
+
+    <figure class="cerceve rv">
+      <img src="img/kitapci.jpg" alt="Joe ve Beck, Mooney's kitapçısının rafları arasında" loading="lazy" onerror="this.parentNode.remove()">
+      <figcaption><span>MOONEY'S SAHAF — NEW YORK</span><span>HER ŞEY BİR VİTRİNLE BAŞLADI</span></figcaption>
+    </figure>
+
+    <section class="bolum">
+      <div class="eyebrow rv">BİRİNCİ MESELE</div>
+      <h2 class="bolum-baslik rv">GÜVENİLMEZ <span class="no">ANLATICI</span></h2>
+      <p class="rv">You'nun bütün numarası, hikâyeyi katilin iç sesinden dinletmesi.
+      <strong>Penn Badgley</strong>, Joe'yu öyle sıcak, öyle esprili, öyle "anlaşılır"
+      oynuyor ki üçüncü bölümde kendini onun tarafını tutarken buluyorsun — sonra
+      ne izlediğini hatırlayıp irkiliyorsun. Dizi bu irkilmeyi bilerek üretiyor:
+      seyircinin romantik komedi reflekslerini bir cinayet hikâyesine bağlıyor
+      ve refleksin ne kadar otomatik olduğunu yüzüne vuruyor.</p>
+      <div class="kenar-not rv">"Seyirci Joe'yu affetmeye bu kadar hazırsa,
+      sorun Joe'da mı?" — dizinin beş sezon boyunca sorduğu tek soru, aslında bu.</div>
+      <p class="rv">Formül her sezon aynı ama şehir ve maske değişiyor: New York'ta
+      kitapçı, Los Angeles'ta "uyanmış" eş adayı, banliyöde aile babası, Londra'da
+      profesör. Joe her yerde aynı cümleyle başlıyor: <em>"Merhaba, sen."</em>
+      Ve her seferinde aynı yere varıyor.</p>
+    </section>
+
+    <figure class="gozetleme rv">
+      <img src="img/gozetleme.jpg" alt="Joe, karanlıkta bir çifti pencereden izliyor" loading="lazy" onerror="this.parentNode.remove()">
+      <figcaption>Her aşk hikâyesinin bir de anlatılmayan açısı vardır. Aşağıda, o açıyı konuşacağız.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ================= YIRTIK ================= -->
+<div class="yirtik">
+  <div class="uyari">DİKKAT: BURADAN SONRASI BODRUMDUR — 1–5. SEZON SPOILERLARI İÇERİR</div>
+</div>
+
+<!-- ================= BODRUM ================= -->
+<main id="bodrum">
+  <div class="icerik">
+
+    <section class="bolum">
+      <div class="eyebrow rv">İKİNCİ MESELE</div>
+      <h2 class="bolum-baslik rv">CAM <span class="no">KAFES</span></h2>
+      <p class="rv">Mooney's'in bodrumunda, nadir kitapları nemden korumak için yapılmış
+      camdan bir oda var. Joe oraya önce kitapları koydu. Sonra insanları.
+      Kafes, dizinin en iyi buluşu: şeffaf, temiz, "koruyucu" — tıpkı Joe'nun
+      kendine anlattığı hikâye gibi. <strong>İçindekini herkes görüyor ama kimse çıkamıyor.</strong></p>
+      <p class="rv">Beş sezon boyunca kafes el değiştirdi: kapatan kapatılan oldu,
+      kurtarıcı rehin düştü. Dizi finalde bu simetriyi sonuna kadar götürdü —
+      ama orayı polaroidlerden sonraya saklıyorum.</p>
+    </section>
+
+    <figure class="kafes-figur rv">
+      <img src="img/kafes.jpg" alt="Joe, bodrumdaki karanlık odada tek başına oturuyor" loading="lazy" onerror="this.parentNode.remove()">
+      <figcaption><span>MOONEY'S — BODRUM KATI</span><span>NADİR KİTAPLAR • NEM KONTROLÜ • TEK ANAHTAR</span></figcaption>
+    </figure>
+
+    <div class="tutanak rv">
+      <div class="t-bas">MADRE LINDA EMNİYET MÜDÜRLÜĞÜ — OLAY TUTANAĞI (SURET)</div>
+      <div class="ipucu">· KARARTILMIŞ İFADELERİN ÜZERİNE GEL YA DA DOKUN ·</div>
+      <div class="t-metin">
+        Olay yeri: <span class="sansur" tabindex="0">fırının bodrum katındaki cam bölme</span>.
+        Şüpheliler: <span class="sansur" tabindex="0">Goldberg-Quinn çifti, evli</span>.
+        Mağdur, bölmede <span class="sansur" tabindex="0">kendi rızası dışında</span> tutulduğunu,
+        kendisine düzenli aralıklarla <span class="sansur" tabindex="0">taze çörek</span> verildiğini beyan etmiştir.
+        Delil №7: <span class="sansur" tabindex="0">şeffaf kutu içinde bir çift kulaklık</span>.
+        Not: kasabanın <span class="sansur" tabindex="0">anti-aşı yanlısı fenomeni</span> ile
+        <span class="sansur" tabindex="0">emlakçının eşi</span> hâlâ kayıptır.
+        Dosya durumu: <span class="sansur" tabindex="0">kapanmıştır — yangın, delilleri küle çevirmiştir</span>.
+      </div>
+      <div class="t-alt">
+        <span>DÜZENLEYEN: MEMUR F. — 22:14</span>
+        <span class="muhur">ASLI GİBİDİR</span>
+      </div>
+    </div>
+
+    <section class="bolum">
+      <div class="eyebrow rv">DELİLLER</div>
+      <h2 class="bolum-baslik rv">TAKINTI <span class="no">ARŞİVİ</span></h2>
+      <p class="rv">Joe onlara "aşk" dedi. Savcı başka bir kelime kullanırdı.
+      Dört kadın, dört sezon, dört farklı son:</p>
+
+      <div class="polaroidler">
+        <article class="pol rv">
+          <span class="damga">CİLT I — KURTULAMADI</span>
+          <div class="p-img"><img src="img/beck.jpg" alt="Guinevere Beck, ekran görüntülerinde" loading="lazy" onerror="this.parentNode.style.background='#333'"></div>
+          <h3>GUINEVERE BECK</h3>
+          <div class="p-alt">ELIZABETH LAIL • NEW YORK</div>
+          <p>Şair adayı. Joe onu önce vitrinden, sonra telefonundan, en sonunda
+          kafesten izledi. Kitabı, ancak ölümünden sonra basıldı.</p>
+        </article>
+        <article class="pol rv">
+          <span class="damga">CİLT II–III — DENGİYDİ</span>
+          <div class="p-img"><img src="img/love.jpg" alt="Love Quinn, beyaz çitli evin önünde" loading="lazy" onerror="this.parentNode.style.background='#333'"></div>
+          <h3>LOVE QUINN</h3>
+          <div class="p-alt">VICTORIA PEDRETTI • LA &amp; MADRE LINDA</div>
+          <p>Joe'nun aynadaki yansıması: onun kadar tutkulu, onun kadar tehlikeli.
+          Evlendiler, banliyöye taşındılar, birbirlerini öldürmeye çalıştılar.
+          Kazanan Joe oldu — her zamanki gibi.</p>
+        </article>
+        <article class="pol rv">
+          <span class="damga">CİLT III–IV — KAÇTI</span>
+          <div class="p-img"><img src="img/marienne.jpg" alt="Marienne Bellamy ve Joe" loading="lazy" onerror="this.parentNode.style.background='#333'"></div>
+          <h3>MARIENNE BELLAMY</h3>
+          <div class="p-alt">TATI GABRIELLE • MADRE LINDA &amp; PARİS</div>
+          <p>Kütüphaneci. Joe'nun ne olduğunu ilk anlayanlardan.
+          Kafesten çıkışı, dizinin en zekice planlarından biriydi:
+          ölü taklidi yapıp kızıyla birlikte sırra kadem bastı.</p>
+        </article>
+        <article class="pol rv">
+          <span class="damga">CİLT IV–V — SON TANIK</span>
+          <div class="p-img"><img src="img/kate.jpg" alt="Kate ve Joe, Londra'da bir pazar yerinde" loading="lazy" onerror="this.parentNode.style.background='#333'"></div>
+          <h3>KATE GALVIN</h3>
+          <div class="p-alt">CHARLOTTE RITCHIE • LONDRA &amp; NEW YORK</div>
+          <p>Galeri yöneticisi, sonra milyarder vâris. Joe'nun "temiz sayfa"
+          hayalinin son kurbanı olmayı reddetti — ve onu bitiren hamlenin
+          parçası oldu. Hayatta. Kazandı.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bolum">
+      <div class="eyebrow rv">KÜTÜPHANE</div>
+      <h2 class="bolum-baslik rv">BEŞ <span class="no">CİLT</span></h2>
+      <p class="rv">Her sezon, Joe'nun rafına bir cilt gibi dizildi. Üzerlerine gel
+      (ya da dokun), sana içindekini fısıldayayım:</p>
+
+      <div class="raf rv" role="group" aria-label="Sezonlar">
+        <button class="cilt" data-soz="Sezon 1 — New York: Kitapçıdaki kibar adam, Beck'in peşine düşer. 'Merhaba, sen.' ilk kez burada söylendi.">CİLT <span class="rakam">I</span></button>
+        <button class="cilt" data-soz="Sezon 2 — Los Angeles: Joe kimlik değiştirir, Love ile tanışır ve ilk kez kendinden korkar: karşısındaki de avcıdır.">CİLT <span class="rakam">II</span></button>
+        <button class="cilt" data-soz="Sezon 3 — Madre Linda: Beyaz çitli ev, komşu barbeküleri, bebek… ve bodrumdaki kafes. Evlilik terapisinin en karanlık hâli.">CİLT <span class="rakam">III</span></button>
+        <button class="cilt" data-soz="Sezon 4 — Londra: 'Profesör Jonathan Moore', zenginler arasında bir katil arar. Aradığı katil, aynada durmaktadır.">CİLT <span class="rakam">IV</span></button>
+        <button class="cilt" data-soz="Sezon 5 — New York, final: Joe başladığı şehre döner. Bu kez kafesin anahtarı başkasının elindedir — ve hikâye, sana dönerek biter.">CİLT <span class="rakam">V</span></button>
+      </div>
+      <div class="raf-etiket" id="rafEtiket">Bir cilt seç.</div>
+    </section>
+
+    <section class="bolum">
+      <div class="eyebrow rv">SON MESELE</div>
+      <h2 class="bolum-baslik rv">DOSYA: <span class="no">SEN</span></h2>
+      <p class="rv">Beş sezon boyunca Joe'nun nasıl çalıştığını okudun: gözlem, not, sabır.
+      Peki o bu sayfanın sahibi olsaydı, senin hakkında ne tutardı?
+      Muhtemelen şöyle bir şey:</p>
+
+      <div class="dosya rv" id="dosyaKart">
+        <span class="d-tab">DOSYA № SEN-001 — AÇIK</span>
+        <dl>
+          <dt>TARİH / SAAT</dt><dd id="dSaat">—</dd>
+          <dt>CİHAZ</dt><dd id="dSistem">—</dd>
+          <dt>TARAYICI</dt><dd id="dTarayici">—</dd>
+          <dt>EKRAN</dt><dd id="dEkran">—</dd>
+          <dt>TEMA TERCİHİ</dt><dd id="dTema">—</dd>
+          <dt>BU SAYFADA</dt><dd id="dSure">00:00</dd>
+          <dt>ZİYARET</dt><dd id="dZiyaret">—</dd>
+        </dl>
+        <p class="yorum" id="dYorum"></p>
+        <button class="yak" id="btnYak">DOSYAYI YAK</button>
+      </div>
+      <p class="rv" style="margin-top:26px;font-size:14px">Endişelenme: hepsi tarayıcının
+      zaten bildiği, bu sayfadan dışarı çıkmayan bilgiler. Joe olsa çıkarırdı ama ben Joe değilim.
+      <em>Muhtemelen.</em></p>
+    </section>
+
+    <section class="bolum">
+      <div class="eyebrow rv">KAYIT</div>
+      <h2 class="bolum-baslik rv">KÜNYE <span class="no">&amp; KARAR</span></h2>
+      <div class="kunye rv">
+        <div class="k-row"><div class="k-k">YAYINCI</div><div class="k-v"><b>Netflix</b> — ilk sezon 2018'de Lifetime'da başladı, fenomen Netflix'te oldu</div></div>
+        <div class="k-row"><div class="k-k">KAYNAK</div><div class="k-v">Caroline Kepnes — <b>You / Hidden Bodies / You Love Me</b></div></div>
+        <div class="k-row"><div class="k-k">GELİŞTİRENLER</div><div class="k-v"><b>Greg Berlanti &amp; Sera Gamble</b></div></div>
+        <div class="k-row"><div class="k-k">SEZONLAR</div><div class="k-v"><b>5 sezon, 50 bölüm</b> (2018–2025) — final Nisan 2025'te yayınlandı</div></div>
+        <div class="k-row"><div class="k-k">NEDEN İZLEMELİ</div><div class="k-v">Bir "guilty pleasure" gibi başlayıp seyircisini sanık sandalyesine oturtan, türünün en öz-farkındalıklı gerilimi. Penn Badgley'nin iç sesi, televizyonun en rahatsız edici ikna kampanyası.</div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="icerik">
+    <section class="bolum">
+      <div class="eyebrow rv">SON POSTA</div>
+      <h2 class="bolum-baslik rv">JOE'DAN <span class="no">MEKTUP</span></h2>
+      <p class="rv">Dizide herkesin kutusundan bir şey çıktı. Senin kutunda bir zarf var.
+      İstersen önce üzerine adını yaz — istersen "sen" olarak kal. Sonra mühre dokun.</p>
+      <div class="ad-satiri rv">
+        <label for="adInput">ZARFIN ÜZERİNE:</label>
+        <input id="adInput" type="text" maxlength="24" placeholder="adın (isteğe bağlı)" autocomplete="off">
+      </div>
+      <div class="zarf rv" id="zarf" role="button" tabindex="0" aria-label="Zarfı aç">
+        <div class="kapak"></div>
+        <div class="muhur">J</div>
+        <div class="adres" id="zarfAdres">sen.</div>
+      </div>
+      <div class="mektup" id="mektup" aria-live="polite"><span id="mYazi"></span></div>
+    </section>
+  </div>
+
+  <!-- final -->
+  <figure class="final rv">
+    <img src="img/final.jpg" alt="Joe, kırmızı ışıkla dolu suyun içinde" loading="lazy" onerror="this.style.minHeight='420px';this.remove()">
+    <div class="f-kat">
+      <div class="f-soz">"Belki de sorun ben değilim.<br>Belki de… <span style="color:var(--kan-parlak)">sensin</span>."</div>
+      <div class="f-kim">JOE GOLDBERG — SON SÖZ, SON BÖLÜM</div>
+    </div>
+  </figure>
+
+  <footer>
+    BU SAYFA RESMÎ DEĞİLDİR — BİR HAYRAN İNCELEMESİDİR<br>
+    FOTOĞRAFLAR: YOU © NETFLIX (TMDB ÜZERİNDEN)<br>
+    <span class="goz">BU SAYFAYI OKURKEN, SAYFA DA SENİ OKUYORDU.</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var flat=location.hash==='#flat';
+  if(flat) document.documentElement.classList.add('flat');
+
+  /* ---- scroll reveal ---- */
+  var rvEls=[].slice.call(document.querySelectorAll('.rv'));
+  function reveal(){
+    var vh=window.innerHeight;
+    rvEls=rvEls.filter(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<vh*0.92 && r.bottom>0){el.classList.add('in');return false;}
+      return true;
+    });
+  }
+  window.addEventListener('scroll',reveal,{passive:true});
+  window.addEventListener('load',reveal);
+  window.addEventListener('resize',reveal);
+  reveal();
+
+  /* ---- "Merhaba, sen." daktilosu ---- */
+  var yazi=document.getElementById('yazi'), hedefYazi='Merhaba, sen.';
+  if(reduced||flat){ yazi.textContent=hedefYazi; }
+  else{
+    var yi=0;
+    setTimeout(function tik(){
+      yazi.textContent=hedefYazi.slice(0,++yi);
+      if(yi<hedefYazi.length) setTimeout(tik, 90+Math.random()*110);
+    },700);
+  }
+
+  /* ---- raf fısıltıları ---- */
+  var etiket=document.getElementById('rafEtiket');
+  document.querySelectorAll('.cilt').forEach(function(c){
+    function soyle(){ etiket.textContent=c.dataset.soz; }
+    c.addEventListener('mouseenter',soyle);
+    c.addEventListener('focus',soyle);
+    c.addEventListener('click',soyle);
+  });
+
+  /* ---- joe'nun defteri: sayfa seni izliyor ---- */
+  var defter=document.getElementById('defter'), dNot=document.getElementById('dNot');
+  var notTimer=null, harfTimer=null, gosterilen={};
+  function notYaz(anahtar,metin){
+    if(gosterilen[anahtar]) return;
+    gosterilen[anahtar]=true;
+    clearTimeout(notTimer); clearInterval(harfTimer);
+    defter.classList.add('gorunur');
+    if(reduced||flat){ dNot.textContent=metin; }
+    else{
+      var i=0; dNot.textContent='';
+      harfTimer=setInterval(function(){
+        dNot.textContent=metin.slice(0,++i);
+        if(i>=metin.length) clearInterval(harfTimer);
+      },34);
+    }
+    notTimer=setTimeout(function(){ defter.classList.remove('gorunur'); }, 7000);
+  }
+  if(flat){ defter.classList.add('gorunur'); dNot.textContent='Geldin. Bekliyordum.'; }
+  else{
+    setTimeout(function(){
+      notYaz('giris', kayitliAd ? ('Yine geldin, '+kayitliAd+'. Bekliyordum.') : 'Geldin. Bekliyordum.');
+    },2500);
+    setTimeout(function(){ notYaz('sabir','Hâlâ buradasın. Acele etmiyorsun. Hoşuma gitti.'); },45000);
+    var idleT=null;
+    function idleSifirla(){
+      clearTimeout(idleT);
+      idleT=setTimeout(function(){ notYaz('durdu','Durdun. Birini mi düşünüyorsun?'); },18000);
+    }
+    ['scroll','pointermove','keydown','touchstart'].forEach(function(ev){
+      window.addEventListener(ev,idleSifirla,{passive:true});
+    });
+    idleSifirla();
+    window.addEventListener('scroll',function(){
+      var d=document.documentElement;
+      if(window.scrollY/(d.scrollHeight-window.innerHeight)>0.78)
+        notYaz('bodrum','Bodruma kadar indin. Cesursun.');
+    },{passive:true});
+    window.addEventListener('blur',function(){ notYaz('veda','Gidiyor musun? Ben hep buradayım.'); });
+  }
+
+  /* ---- okuma kurdelesi ---- */
+  var kKap=document.getElementById('kurdeleKap'),
+      kSerit=kKap.querySelector('.serit'), kYuzde=kKap.querySelector('.yuzde');
+  function kurdeleGuncelle(){
+    var d=document.documentElement, max=d.scrollHeight-window.innerHeight;
+    var pct=max>0?Math.min(1,window.scrollY/max):0;
+    kKap.classList.toggle('gorunur',pct>0.02);
+    kSerit.style.height=Math.round(pct*window.innerHeight*0.42)+'px';
+    kYuzde.textContent='%'+Math.round(pct*100)+' OKUNDU';
+  }
+  window.addEventListener('scroll',kurdeleGuncelle,{passive:true});
+  window.addEventListener('resize',kurdeleGuncelle);
+  kurdeleGuncelle();
+
+  /* ---- sansürlü tutanak: dokununca da açılsın ---- */
+  var iz={sansur:0,yakti:false};
+  document.querySelectorAll('.sansur').forEach(function(s){
+    function ac(){ s.classList.toggle('acik'); if(s.classList.contains('acik')) iz.sansur++; }
+    s.addEventListener('click',ac);
+    s.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); ac(); }
+    });
+  });
+
+  /* ---- dosya: sen ---- */
+  var ua=navigator.userAgent;
+  function metin(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  var simdi=new Date();
+  var tarih=simdi.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
+  metin('dSaat',(tarih+' — '+simdi.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})).toLocaleUpperCase('tr'));
+  metin('dSistem', /Windows/.test(ua)?'WINDOWS':/Android/.test(ua)?'ANDROID':/iPhone|iPad/.test(ua)?'IOS':/Mac/.test(ua)?'MAC':/Linux/.test(ua)?'LINUX':'BİLİNMİYOR');
+  metin('dTarayici', /Edg\//.test(ua)?'EDGE':/OPR\//.test(ua)?'OPERA':/Chrome\//.test(ua)?'CHROME':/Firefox\//.test(ua)?'FIREFOX':/Safari\//.test(ua)?'SAFARI':'BİLİNMİYOR');
+  metin('dEkran', screen.width+' × '+screen.height+' — GAYET NET GÖRÜYORUM');
+  metin('dTema', window.matchMedia('(prefers-color-scheme: dark)').matches?'KARANLIK — TAHMİN ETMİŞTİM':'AYDINLIK — İYİMSERSİN');
+  var saat=simdi.getHours(), yorumlar=
+    saat<6 ? 'Bu saatte uyumak yerine beni okuyorsun. Dokunaklı.' :
+    saat<12 ? 'Güne benimle başlamışsın. Kahveni aldın mı?' :
+    saat<18 ? 'Öğleden sonra molası. Kimseye söylemem.' :
+    'Akşamları herkes biraz Joe olur. Sen de fark ettin demek.';
+  metin('dYorum','“'+yorumlar+'”');
+  var basla=Date.now();
+  setInterval(function(){
+    var sn=Math.floor((Date.now()-basla)/1000);
+    metin('dSure', String(Math.floor(sn/60)).padStart(2,'0')+':'+String(sn%60).padStart(2,'0')+' — VE SAYIYORUM');
+  },1000);
+  var ziyaretN=1;
+  try{
+    ziyaretN=(parseInt(localStorage.getItem('you_ziyaret'),10)||0)+1;
+    localStorage.setItem('you_ziyaret',String(ziyaretN));
+  }catch(e){}
+  metin('dZiyaret', ziyaretN===1?'İLK GELİŞ — HOŞ GELDİN':ziyaretN+'. GELİŞ — GERİ DÖNDÜN');
+  if(ziyaretN>=3 && !flat) setTimeout(function(){ notYaz('alisti',ziyaretN+'. gelişin. Alışıyorsun. İkimiz de biliyoruz.'); },9000);
+  document.getElementById('btnYak').addEventListener('click',function(){
+    document.getElementById('dosyaKart').classList.add('yandi');
+    iz.yakti=true;
+    try{ localStorage.removeItem('you_ziyaret'); }catch(e){}
+    notYaz('yak','Dosyayı yaktın. Sorun değil. Zaten ezberimdeydi.');
+  });
+
+  /* ---- sekme kaçış tuzağı ---- */
+  var asilBaslik=document.title;
+  document.addEventListener('visibilitychange',function(){
+    document.title = document.hidden ? 'Nereye gittin?' : asilBaslik;
+  });
+
+  /* ---- "joe" yazma sürprizi ---- */
+  var tampon='';
+  window.addEventListener('keydown',function(e){
+    if(e.key && e.key.length===1 && e.target.tagName!=='INPUT'){
+      tampon=(tampon+e.key.toLocaleLowerCase('tr')).slice(-5);
+      if(tampon.slice(-3)==='joe') notYaz('isim','Adımı yazman hoşuma gitti. Ben de seninkini biliyorum… Şaka. Şimdilik.');
+    }
+  });
+
+  /* ---- joe'dan mektup ---- */
+  var zarf=document.getElementById('zarf'), mektup=document.getElementById('mektup'),
+      mYazi=document.getElementById('mYazi'), adInput=document.getElementById('adInput'),
+      zarfAdres=document.getElementById('zarfAdres');
+  var kayitliAd='';
+  try{ kayitliAd=localStorage.getItem('you_isim')||''; }catch(e){}
+  if(kayitliAd){ adInput.value=kayitliAd; zarfAdres.textContent=kayitliAd+'.'; }
+  adInput.addEventListener('input',function(){
+    var v=adInput.value.trim();
+    zarfAdres.textContent=(v||'sen')+'.';
+    try{ if(v){localStorage.setItem('you_isim',v);}else{localStorage.removeItem('you_isim');} }catch(e){}
+  });
+  function mektupOlustur(){
+    var ad=adInput.value.trim()||'sen';
+    var par=['Sevgili '+ad+','];
+    par.push('bugün '+tarih+', saat '+simdi.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})+' sularında geldin.');
+    par.push(ziyaretN<=1
+      ? 'İlk gelişindi — ilk izlenimler önemlidir; bence ikimiz de iyi bir izlenim bıraktık.'
+      : 'Bu '+ziyaretN+'. gelişindi. Geri dönenleri hep sevmişimdir.');
+    par.push(iz.sansur>0
+      ? 'Tutanaktaki karartmalardan '+iz.sansur+' tanesini açtın. Meraklısın. Bu, ikimizi benzer kılıyor.'
+      : 'Karartmalara hiç dokunmadın. Ya çok naziksin ya da bilmemeyi seçtin — ikisi de işime gelir.');
+    par.push(iz.yakti
+      ? 'Dosyanı yaktın; anlıyorum, ben de izlerimi temizlerim. Ama kopyası bende.'
+      : 'Bu arada, dosyan hâlâ açık. Kapatmak isteyen sen ol istedim.');
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches)
+      par.push('Karanlık temada okuyorsun; demek ışığı sevmeyen yalnız ben değilim.');
+    par.push('Şimdi sayfayı kapatabilirsin. Kapatırken başlığın ne dediğine dikkat et. Görüşeceğiz.');
+    return par.join(' ')+'\n\n— J.';
+  }
+  var mektupHarf=null;
+  function zarfAc(){
+    if(zarf.classList.contains('acik')) return;
+    zarf.classList.add('acik');
+    mektup.classList.add('gorunur');
+    var metinM=mektupOlustur();
+    if(reduced||flat){ mYazi.textContent=metinM; return; }
+    var i=0;
+    mektupHarf=setInterval(function(){
+      mYazi.textContent=metinM.slice(0,++i);
+      if(i>=metinM.length) clearInterval(mektupHarf);
+    },18);
+  }
+  zarf.addEventListener('click',zarfAc);
+  zarf.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); zarfAc(); }
+  });
+  if(flat) zarfAc();
+})();
+</script>
+</body>
+</html>
